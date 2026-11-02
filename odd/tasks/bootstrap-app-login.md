@@ -36,7 +36,7 @@ Scope: only the above — no fake analytics dashboards, no users CRUD, no OAuth 
 | T1 | S1, S2 | delegated: gentle-ai-worker | done — commit `2638874`; S2 full, S1 full (.env.example created by parent after worker permission denial); build 330.37 kB, tests 17/17 |
 | T2 | S4, S5, S3 | delegated: gentle-ai-worker | done — commit `fc6bdbb`; tests 51/51, build green |
 | T3 | S6 | delegated: gentle-ai-worker | done — commit `50c1998`; tests 54/54, build green. Note: responsive switch uses MUI `md` (900px) vs DESIGN.md 768px table breakpoint (advisory) |
-| T4 | S1-S6 | delegated: gentle-ai-verify | pending |
+| T4 | S1-S6 | delegated: gentle-ai-verify | done — open/close checks; S1-S6 all PASS, 0 blockers; advisories: md 900px vs 768px, 2 axios instances (refresh sin recursion), font weights superset, chunk >500kB warning, dev binds localhost |
 
 ## Log
 
