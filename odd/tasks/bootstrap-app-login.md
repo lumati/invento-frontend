@@ -33,7 +33,7 @@ Scope: only the above — no fake analytics dashboards, no users CRUD, no OAuth 
 
 | ID | S# | Route | Status |
 | --- | --- | --- | --- |
-| T1 | S1, S2 | delegated: gentle-ai-worker | pending |
+| T1 | S1, S2 | delegated: gentle-ai-worker | done — commit `2638874`; S2 full, S1 full (.env.example created by parent after worker permission denial); build 330.37 kB, tests 17/17 |
 | T2 | S4, S5, S3 | delegated: gentle-ai-worker | pending |
 | T3 | S6 | delegated: gentle-ai-worker | pending |
 | T4 | S1-S6 | delegated: gentle-ai-verify | pending |
@@ -43,4 +43,4 @@ Scope: only the above — no fake analytics dashboards, no users CRUD, no OAuth 
 - L1 (2026-11-02, user request, verbatim): "Este es un sistema frontend administrativo desarrolado en react, typescript y material ui v9, arma la estructura necesaria para el proyecto. la documentación del backend esta en http://127.0.0.1:8000, puedes revisar su carpeta ../invento-backend/ para realizar la funcionalidad del login. Lee el archivo DESING.md para el esquema del theme por defecto."
 - L2 (2026-11-02, evidence): Backend API docs at http://127.0.0.1:8000 unreachable ("No es posible conectar con el servidor remoto"). Contract sourced instead from `../invento-backend/routes/api.php` and `../invento-backend/src/Authentication/Infrastructure/Http/Controllers/LoginController.php` (OpenAPI annotations verbatim in S3), plus `../invento-backend/AUTHENTICATION_README.md` (refresh/logout endpoints).
 - L3 (2026-11-02, decision): Frontend repo is empty (only DESIGN.md, DESIGN-preview.html). Theme source is `DESIGN.md` (user wrote "DESING.md"; actual file `DESIGN.md` at repo root, Kaiadmin Lite tokens).
-- L4 (2026-11-02, worktree): `C:\Users\Nelson Luna\.local\share\opencode\worktree\6ef80a\feat\bootstrap-login`, branch `feat/bootstrap-login`.
+- L4 (2026-11-02, worktree): `C:\Users\Nelson Luna\.local\share\opencode\worktree\6ef80a\feat\bootstrap-login`, branch `feat/bootstrap-login`. Branch created from detached HEAD `46ad29b`; T1 committed as `2638874`. Stack observed: Vite 7.3.7, React 19.3.1, MUI 9.5.0, TS 5.9.3, Vitest 5.1.0. Gotcha: MUI v9 Button override key `containedPrimary` renamed → `colorPrimary`.
