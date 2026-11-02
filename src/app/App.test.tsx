@@ -1,28 +1,51 @@
-import { renderToStaticMarkup } from 'react-dom/server';
-import { describe, expect, it } from 'vitest';
+// @vitest-environment jsdom
+import '@testing-library/jest-dom/vitest';
+import { cleanup, render, screen } from '@testing-library/react';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
+import { clearSession, saveSession } from '@/api/session';
 import { KaiadminThemeProvider } from '@/theme';
 
 import App from './App';
 
-function renderApp(): string {
-  return renderToStaticMarkup(
+function renderApp() {
+  return render(
     <KaiadminThemeProvider>
       <App />
     </KaiadminThemeProvider>,
   );
 }
 
-describe('App placeholder', () => {
-  it('mounts inside the Kaiadmin theme provider', () => {
-    const markup = renderApp();
-    expect(markup).toContain('Invento Admin');
-    expect(markup).toContain('Scaffold ready');
+beforeEach(() => {
+  window.localStorage.clear();
+  clearSession();
+  window.history.replaceState({}, '', '/');
+});
+
+afterEach(() => {
+  cleanup();
+  clearSession();
+  window.history.replaceState({}, '', '/');
+});
+
+describe('App routes', () => {
+  it('redirects unauthenticated visitors of the protected area to the login page', () => {
+    renderApp();
+
+    expect(screen.getByRole('heading', { name: 'Invento Admin' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Sign in' })).toBeInTheDocument();
+    expect(window.location.pathname).toBe('/login');
   });
 
-  it('paints the canvas background and Public Sans body font through CssBaseline', () => {
-    const markup = renderApp();
-    expect(markup).toContain('#F5F7FD');
-    expect(markup).toContain('Public Sans');
+  it('renders the authenticated placeholder for a persisted session', () => {
+    saveSession({
+      accessToken: 'access-1',
+      refreshToken: 'refresh-1',
+      user: { id: 1, username: 'johndoe', email: 'user@example.com' },
+    });
+
+    renderApp();
+
+    expect(screen.getByText('Signed in as johndoe')).toBeInTheDocument();
   });
 });
